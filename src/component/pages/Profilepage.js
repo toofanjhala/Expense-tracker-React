@@ -4,39 +4,36 @@ import Authcontext from '../../store/Auth-context'
 
 export const Profilepage = () => {
 	const authctx = useContext(Authcontext)
-		
-    const nameref = useRef("")
+
+	const nameref = useRef("")
 	const urlref = useRef("")
-	useEffect(()=>{
-		fetch("https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyBiavyg_VJqzOb714tLnQrb7h5qRK0P8Hs",
-		{
-			method: "POST",
-			body: JSON.stringify({
-				idToken: authctx.token,
-			}),
-			headers: {
-				'Content-Type': 'application/json'
+	useEffect(() => {
+
+		async function fetchdata() {
+			const res = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyBiavyg_VJqzOb714tLnQrb7h5qRK0P8Hs",
+				{
+					method: "POST",
+					body: JSON.stringify({
+						idToken: authctx.token,
+					}),
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				})
+			const data = await res.json()
+
+			if (data.users[0].displayName) {
+				nameref.current.value = data.users[0].displayName
+				urlref.current.value = data.users[0].photoUrl
 			}
-		}).then((res) => {
-		
-			return res.json()
-		}).then((data)=>{
-			if(data.users[0].displayName)
-			{
-				nameref.current.value=data.users[0].displayName
-				urlref.current.value=data.users[0].photoUrl
-			}
+		}
 
-		
-			
-        
-			
-		})
+		fetchdata()
 
-	},[authctx.token])
+	}, [authctx.token])
 
-	
-  
+
+
 
 	function formhandler(event) {
 		event.preventDefault()
