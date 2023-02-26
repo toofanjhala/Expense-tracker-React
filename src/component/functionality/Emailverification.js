@@ -33,6 +33,8 @@ export const Emailverification = () => {
     }
 
     return (
-        <Button variant='danger' onClick={emailverifyhandler}>Email Verfication</Button>
+        <Button variant='success' 
+        style={{position:"fixed",top:"8rem", right:"2rem"}}
+        onClick={emailverifyhandler}>Email Verfication</Button>
     )
 }

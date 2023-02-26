@@ -1,13 +1,12 @@
-import React,{useContext} from 'react'
+import React from 'react'
 import { Outlet } from 'react-router-dom'
-import { Logout } from '../functionality/logout'
-import Authcontext from '../../store/Auth-context'
-
+import { Header } from '../UI/Header'
  const Rootlayout = () => {
-  let authctx=useContext(Authcontext)
+  
   return (
     <>
-    {authctx.isLoggein && <Logout/>}
+    <Header></Header>
+   
     <Outlet/>
     </>
   )

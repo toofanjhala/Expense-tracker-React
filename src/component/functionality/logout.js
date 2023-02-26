@@ -14,6 +14,6 @@ let authctx=useContext(Authcontext)
         navigate("/")
     }
   return (
-    <Button variant='danger' onClick={logouthandler} style={{position:"fixed", top:"0", right:"0" , margin:"8px"}}>Logout</Button>
+    <Button variant='danger' onClick={logouthandler} style={{position:"fixed", top:"0", right:"0" , margin:"14px"}}>Logout</Button>
   )
 }
