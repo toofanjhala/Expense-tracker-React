@@ -1,6 +1,6 @@
 import { useState, useRef, useContext } from 'react';
-
-import Authcontext from '../store/Auth-context';
+import { useNavigate} from 'react-router-dom';
+import Authcontext from "../../store/Auth-context"
 // import { useNavigate } from 'react-router-dom';
 
 import classes from './AuthForm.module.css';
@@ -9,9 +9,10 @@ import classes from './AuthForm.module.css';
 
 const AuthForm = () => {
 
-  //  const Navigate=useNavigate()
+   const Navigate=useNavigate()
 
   const authctx = useContext(Authcontext)
+  
   const emailref = useRef("")
   const passwordref = useRef("")
   const confirmpasswordref = useRef("")
@@ -28,17 +29,18 @@ const AuthForm = () => {
 
     const enteredemail = emailref.current.value;
     const enteredpassword = passwordref.current.value;
-    const enterconfirmpswrd = confirmpasswordref.current.value
 
-    if(enterconfirmpswrd!==enteredpassword)
-    {
-      alert("password is in correct")
-      setrequest(false)
-      return
+    if (!isLogin) {
+      const enterconfirmpswrd = confirmpasswordref.current.value
+
+      if (enterconfirmpswrd !== enteredpassword) {
+        alert("password is in correct")
+        setrequest(false)
+        return
+
+      }
 
     }
-
-    console.log("check")
 
 
 
@@ -78,10 +80,9 @@ const AuthForm = () => {
         }
 
       }).then((data) => {
-
-        console.log("succesfully signup")
-
+        Navigate("/home")
         authctx.login(data.idToken)
+       
 
       })
       .catch((Err) => {
@@ -106,7 +107,7 @@ const AuthForm = () => {
               ref={passwordref}
             />
           </div>
-         { !isLogin && <div className={classes.control}>
+          {!isLogin && <div className={classes.control}>
             <label htmlFor='confirmpassword'>Confirm Password</label>
             <input
               type='password'
@@ -120,7 +121,7 @@ const AuthForm = () => {
             {request ? <p> Request sending</p> : <button onClick={submithandler}>{isLogin ? 'Login' : 'Sign up'}</button>}
 
           </div>
-           { isLogin &&<a href='#abcd' style={{color:"black"}}> Forgot password</a>}
+          {isLogin && <a href='#abcd' style={{ color: "black" }}> Forgot password</a>}
         </form>
       </section>
       <div className={classes.actions}>
