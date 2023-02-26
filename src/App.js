@@ -5,6 +5,7 @@ import  Rootlayout from './component/pages/Rootlayout';
 import Home from './component/pages/Home';
 import { AuthContextProvider } from './store/Auth-context';
 import { Profilepage } from './component/pages/Profilepage';
+import { Resetpassword } from './component/pages/Resetpassword';
 
 function App() {
 
@@ -16,7 +17,8 @@ function App() {
         children:[
           {path:"/" ,element:<AuthForm/> },
           {path:"/home",element:<Home/>},
-          {path:"/profile",element:<Profilepage/>}
+          {path:"/profile",element:<Profilepage/>},
+          {path:"/resetpassword",element:<Resetpassword/>}
         ]
       }
     ]

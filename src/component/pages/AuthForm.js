@@ -1,5 +1,5 @@
 import { useState, useRef, useContext } from 'react';
-import { useNavigate} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import Authcontext from "../../store/Auth-context"
 // import { useNavigate } from 'react-router-dom';
 
@@ -91,6 +91,7 @@ const AuthForm = () => {
   }
   return (
     <>
+    	<h2 className='heading'>Expense Tracker</h2>
       <section className={classes.auth} >
         <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
         <form>
@@ -121,7 +122,7 @@ const AuthForm = () => {
             {request ? <p> Request sending</p> : <button onClick={submithandler}>{isLogin ? 'Login' : 'Sign up'}</button>}
 
           </div>
-          {isLogin && <a href='#abcd' style={{ color: "black" }}> Forgot password</a>}
+          {isLogin && <Link to='/resetpassword' style={{ color: "black" }}> Forgot password</Link>}
         </form>
       </section>
       <div className={classes.actions}>
