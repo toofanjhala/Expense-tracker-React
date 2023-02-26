@@ -2,9 +2,9 @@
     margin: 3rem auto;
     width: 95%;
     max-width: 25rem;
-    border-radius: 6px;
+    border-radius: 10px;
     background-color:#bbe4e9;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     padding: 1rem;
     text-align: center;
     color:whitesmoke;

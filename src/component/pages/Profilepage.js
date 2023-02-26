@@ -1,13 +1,42 @@
-import React, { useRef, useContext } from 'react'
+import React, { useRef, useContext, useEffect } from 'react'
 import "./profilepage.css"
 import Authcontext from '../../store/Auth-context'
 
 export const Profilepage = () => {
-
 	const authctx = useContext(Authcontext)
-
-	const nameref = useRef("")
+		
+    const nameref = useRef("")
 	const urlref = useRef("")
+	useEffect(()=>{
+		fetch("https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyBiavyg_VJqzOb714tLnQrb7h5qRK0P8Hs",
+		{
+			method: "POST",
+			body: JSON.stringify({
+				idToken: authctx.token,
+			}),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then((res) => {
+		
+			return res.json()
+		}).then((data)=>{
+			if(data.users[0].displayName)
+			{
+				nameref.current.value=data.users[0].displayName
+				urlref.current.value=data.users[0].photoUrl
+			}
+
+		
+			
+        
+			
+		})
+
+	},[authctx.token])
+
+	
+  
 
 	function formhandler(event) {
 		event.preventDefault()
@@ -28,7 +57,7 @@ export const Profilepage = () => {
 					'Content-Type': 'application/json'
 				}
 			}).then((res) => {
-				console.log(res)
+				// console.log(res)
 				if (res.ok) {
 					return res.json()
 				}
