@@ -1,6 +1,7 @@
 import React, { useRef, useContext, useEffect } from 'react'
 import "./profilepage.css"
 import Authcontext from '../../store/Auth-context'
+import { Header } from '../UI/Header'
 
 export const Profilepage = () => {
 	const authctx = useContext(Authcontext)
@@ -76,6 +77,7 @@ export const Profilepage = () => {
 
 	return (
 		<div>
+		<Header></Header>
 			<h2 className='heading'> Complete profile Registration</h2>
 			<form className="form-container">
 				<h2>User Details</h2>

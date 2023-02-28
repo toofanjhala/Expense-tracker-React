@@ -5,7 +5,7 @@
     z-index: 999;
     background-color: #f8f8f8;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    margin-bottom:rem;
+    margin-bottom:2rem;
   }
   
   .navbar {
@@ -16,6 +16,7 @@
     max-width: 1300px;
     margin: 0 auto;
     padding: 0 20px;
+    margin-bottom: 0.3rem;
   }
   
   .navbar__title {
@@ -23,6 +24,7 @@
     font-weight: bold;
     margin: 0;
     padding: 0;
+    
   }
   
   .navbar__list {

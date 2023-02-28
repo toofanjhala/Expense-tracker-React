@@ -1,13 +1,13 @@
 
 
 .auth {
-    margin: 3rem auto;
+    margin: 2rem auto;
     width: 95%;
     max-width: 25rem;
     border-radius: 10px;
     background-color:#bbe4e9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 1rem;
+    padding: 0.5rem;
     text-align: center;
     color:whitesmoke;
    
@@ -61,7 +61,7 @@
     background-color: #25003e;
     border: 1px solid #25003e;
     border-radius: 4px;
-    padding: 0.5rem 2.5rem;
+    padding: 0.5rem 1.5rem;
   }
   
   .actions button:hover {

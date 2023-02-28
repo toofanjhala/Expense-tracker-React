@@ -1,6 +1,7 @@
 import React,{useRef} from 'react'
 import { Link } from 'react-router-dom'
-import "./Resetpassword.css"
+import { Header } from '../UI/Header'
+import classes from "./Resetpassword.module.css"
 
 export const Resetpassword = () => {
 
@@ -37,14 +38,17 @@ export const Resetpassword = () => {
     
 
   return (
-    <div className="container">
-    <h1>Reset Password</h1>
+    <React.Fragment>
+      <Header/>
+      <div className={classes.container}>
+    <h1 className={classes.h1abc}>Reset Password</h1>
     <form>
-      <label htmlFor="email">Registered Email Address:</label>
-      <input type="email" id="email" name="email" placeholder="Enter your email address"  ref={emailref} required/>
+      <label htmlFor="email">Registered Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter registered email address"  ref={emailref} required/>
       <button type="submit" id="send-link-btn" onClick={resetpasswordhandler}>Send Reset Link</button>
     </form>
-    <Link to="/" className="login-link">Already a user? Login</Link>
+    <Link to="/" className={classes.loginlink}>Already a user? Login</Link>
   </div>
+ </React.Fragment>
   )
 }

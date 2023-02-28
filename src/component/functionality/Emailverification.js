@@ -26,6 +26,8 @@ export const Emailverification = () => {
             if (!res.ok) {
                 const errormessage = "Login again"
                 throw new Error(errormessage)
+            }else{
+                alert("please check your registered email link sent")
             }
         } catch (Err) {
             alert(Err)

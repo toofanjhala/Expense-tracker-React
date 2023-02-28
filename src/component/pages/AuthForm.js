@@ -2,7 +2,7 @@ import { useState, useRef, useContext } from 'react';
 import { Link, useNavigate} from 'react-router-dom';
 import Authcontext from "../../store/Auth-context"
 // import { useNavigate } from 'react-router-dom';
-
+import { Header } from '../UI/Header';
 import classes from './AuthForm.module.css';
 
 
@@ -91,6 +91,7 @@ const AuthForm = () => {
   }
   return (
     <>
+        <Header/>
     	<h2 className='heading'>Expense Tracker</h2>
       <section className={classes.auth} >
         <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
