@@ -1,11 +1,11 @@
-import React, { useRef, useContext, useEffect } from 'react'
+import React, { useRef,  useEffect } from 'react'
 import "./profilepage.css"
-import Authcontext from '../../store/Auth-context'
 import { Header } from '../UI/Header'
+import { useSelector } from 'react-redux'
 
 export const Profilepage = () => {
-	const authctx = useContext(Authcontext)
-
+	
+	const token=useSelector(state=>state.auth.token)
 	const nameref = useRef("")
 	const urlref = useRef("")
 	useEffect(() => {
@@ -15,7 +15,7 @@ export const Profilepage = () => {
 				{
 					method: "POST",
 					body: JSON.stringify({
-						idToken: authctx.token,
+						idToken: token,
 					}),
 					headers: {
 						'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ export const Profilepage = () => {
 
 		fetchdata()
 
-	}, [authctx.token])
+	}, [token])
 
 
 
@@ -40,13 +40,13 @@ export const Profilepage = () => {
 		event.preventDefault()
 		const enteredname = nameref.current.value
 		const enteredUrl = urlref.current.value
-		console.log(enteredUrl, enteredname)
+		
 
 		fetch("https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyBiavyg_VJqzOb714tLnQrb7h5qRK0P8Hs",
 			{
 				method: "POST",
 				body: JSON.stringify({
-					idToken: authctx.token,
+					idToken: token,
 					displayName: enteredname,
 					photoUrl: enteredUrl,
 					returnSecureToken: true
@@ -55,7 +55,7 @@ export const Profilepage = () => {
 					'Content-Type': 'application/json'
 				}
 			}).then((res) => {
-				// console.log(res)
+				
 				if (res.ok) {
 					return res.json()
 				}

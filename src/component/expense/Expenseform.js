@@ -25,9 +25,9 @@ export const Expenseform = () => {
 
   async function edithandler(id) {
     const data = await authCtx.edititems(id)
-    console.log(data)
+  
     setEditExpense({ amount: data.amount, description: data.description, category: data.category })
-    
+
   }
 
 
@@ -43,15 +43,15 @@ export const Expenseform = () => {
           <h2>Expense Details</h2>
           <div >
             <label htmlFor="expense">Total Expense:</label>
-            <input type="number" id="expense" name="expense" value={editExpense.amount} onChange={(e) => setEditExpense({ ...editExpense, amount: e.target.value })} required />
+            <input type="number" id="expense" name="expense" required  value={editExpense.amount} onChange={(e) => setEditExpense({ ...editExpense, amount: e.target.value })} />
           </div>
           <div >
             <label htmlFor="description">Description:</label>
-            <textarea id="description" name="description" value={editExpense.description} onChange={(e) => setEditExpense({ ...editExpense, description: e.target.value })}  ></textarea>
+            <textarea id="description" name="description" required  value={editExpense.description} onChange={(e) => setEditExpense({ ...editExpense, description: e.target.value })}  ></textarea>
           </div>
           <div>
             <label className="category-label" htmlFor="category">Category:</label>
-            <select id="category" name="category" value={editExpense.category} onChange={(e) => setEditExpense({ ...editExpense, category: e.target.value })}>
+            <select id="category" name="category"  value={editExpense.category} onChange={(e) => setEditExpense({ ...editExpense, category: e.target.value })}>
               <option value="food"   >Food</option>
               <option value="movie"  >Movie</option>
               <option value="petrol" >Petrol</option>

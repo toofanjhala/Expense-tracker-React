@@ -2,10 +2,7 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 
 const Authcontext = React.createContext({
-  token: "",
-  isLoggein: false,
-  login: (token) => { },
-  logout: () => { },
+  
   item: [],
   additems: (obj) => { },
   deleteitems: (id) => { },
@@ -21,9 +18,6 @@ export const AuthContextProvider = (props) => {
 
 
   const [items, setItems] = useState([])
-  const intialtoken = localStorage.getItem("token")
-  const [token, settoken] = useState(intialtoken)
-  const isloggedinboolean = !!token
   const [EditedAmount, setEditedamount] = useState('')
   const [EditedDescription, setDescription] = useState("")
   const [EditedCategory, setCategory] = useState("")
@@ -62,15 +56,6 @@ export const AuthContextProvider = (props) => {
 
 
 
-  function loginhandler(token) {
-    settoken(token)
-    localStorage.setItem("token", token)
-  }
-
-  function logouthandler() {
-    settoken(null)
-    localStorage.removeItem("token")
-  }
 
   async function additemhandler(obj) {
     try {
@@ -85,7 +70,7 @@ export const AuthContextProvider = (props) => {
   }
 
   async function DeleteitemHandler(id) {
-    console.log(id)
+   
     try {
       const res = await axios.delete(`https://expense-tracker-1c21b-default-rtdb.firebaseio.com/cart/${id}.json`)
       console.log(res)
@@ -101,8 +86,8 @@ export const AuthContextProvider = (props) => {
       const response = await axios.get(`https://expense-tracker-1c21b-default-rtdb.firebaseio.com/cart/${id}.json`)
 
       if (response.status === 200) {
-      const data = await DeleteitemHandler(id)  
-      console.log(data)
+       await DeleteitemHandler(id)  
+      
 
         setEditedamount(response.data.amount)
         setDescription(response.data.description)
@@ -123,10 +108,7 @@ export const AuthContextProvider = (props) => {
 
 
   const contextValue = {
-    token: token,
-    isLoggein: isloggedinboolean,
-    login: loginhandler,
-    logout: logouthandler,
+   
     item: items,
     additems: additemhandler,
     deleteitems: DeleteitemHandler,

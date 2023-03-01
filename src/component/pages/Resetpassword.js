@@ -11,7 +11,7 @@ export const Resetpassword = () => {
         event.preventDefault()
 
         const enteredemail=emailref.current.value
-        console.log(enteredemail)
+       
           try {
                 const res = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyBiavyg_VJqzOb714tLnQrb7h5qRK0P8Hs",
                     {

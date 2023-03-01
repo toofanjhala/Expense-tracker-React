@@ -1,11 +1,11 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Button } from 'react-bootstrap'
-import Authcontext from '../../store/Auth-context'
 
+import { useSelector } from 'react-redux'
 
 export const Emailverification = () => {
-
-    let authctx = useContext(Authcontext)
+    const token=useSelector(state=>state.auth.token)
+   
 
     async function emailverifyhandler() {
         try {
@@ -13,14 +13,14 @@ export const Emailverification = () => {
                 {
                     method: "POST",
                     body: JSON.stringify({
-                        idToken: authctx.token,
+                        idToken:token,
                         requestType: "VERIFY_EMAIL"
                     }),
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 })
-            console.log(res)
+           
             const data = await res.json()
             console.log(data)
             if (!res.ok) {

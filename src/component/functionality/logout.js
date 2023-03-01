@@ -1,19 +1,20 @@
-import React ,{useContext}from 'react'
+import React from 'react'
 import { Button } from 'react-bootstrap'
-import Authcontext from '../../store/Auth-context'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { AuthAction } from '../../store/AuthSlice'
 
 
 export const Logout = () => {
-    let navigate=useNavigate()
-let authctx=useContext(Authcontext)
+  let navigate = useNavigate()
+  const dispatch = useDispatch()
 
 
- function logouthandler(){
-        authctx.logout()
-        navigate("/")
-    }
+  function logouthandler() {
+    dispatch(AuthAction.logout())
+    navigate("/")
+  }
   return (
-    <Button variant='danger' onClick={logouthandler} style={{position:"fixed", top:"0", right:"0" , margin:"14px"}}>Logout</Button>
+    <Button variant='danger' onClick={logouthandler} style={{ position: "fixed", top: "0", right: "0", margin: "14px" }}>Logout</Button>
   )
 }

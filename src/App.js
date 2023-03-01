@@ -1,25 +1,19 @@
-import React, { useContext } from 'react';
+import React  from 'react';
 import AuthForm from './component/pages/AuthForm';
-
 import Home from './component/pages/Home';
-import Authcontext from './store/Auth-context';
 import { Profilepage } from './component/pages/Profilepage';
 import { Resetpassword } from './component/pages/Resetpassword';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 
 function App() {
-
-  let authctx = useContext(Authcontext)
-
-  const isAuthenticated = authctx.isLoggein
+  const isAuthenticated=useSelector(state=>state.auth.isLoggein)
  
-
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" exact element={<AuthForm />} /> 
+       {!isAuthenticated && <Route path="/" exact element={<AuthForm />} /> }
+       {isAuthenticated && <Route path="/" exact element={<Home />} /> }
         <Route path="/resetpassword" element={<Resetpassword />} />
        {isAuthenticated  && <Route path="/home" element={<Home />} /> }
        {!isAuthenticated  && <Route path="/home" element={<AuthForm/>} /> }

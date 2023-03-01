@@ -1,18 +1,19 @@
-import { useState, useRef, useContext } from 'react';
-import { Link, useNavigate} from 'react-router-dom';
-import Authcontext from "../../store/Auth-context"
-// import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useState, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+// import Authcontext from "../../store/Auth-context"
 import { Header } from '../UI/Header';
 import classes from './AuthForm.module.css';
-
+import { useDispatch } from 'react-redux';
+import { AuthAction } from '../../store/AuthSlice';
 
 
 const AuthForm = () => {
 
-   const Navigate=useNavigate()
+  const dispatch = useDispatch()
 
-  const authctx = useContext(Authcontext)
-  
+  const Navigate = useNavigate()
+
   const emailref = useRef("")
   const passwordref = useRef("")
   const confirmpasswordref = useRef("")
@@ -81,8 +82,7 @@ const AuthForm = () => {
 
       }).then((data) => {
         Navigate("/home")
-        authctx.login(data.idToken)
-       
+        dispatch(AuthAction.login(data.idToken))
 
       })
       .catch((Err) => {
@@ -91,8 +91,8 @@ const AuthForm = () => {
   }
   return (
     <>
-        <Header/>
-    	<h2 className='heading'>Expense Tracker</h2>
+      <Header />
+      <h2 className='heading'>Expense Tracker</h2>
       <section className={classes.auth} >
         <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
         <form>
