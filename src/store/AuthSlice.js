@@ -4,8 +4,12 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const intialtoken = localStorage.getItem("token")
 
-const intialAuthstate={ token: intialtoken,
+const intialAuthstate={ 
+token: intialtoken,
 isLoggein: !!intialtoken,
+
+
+
 }
 
 const AuthSlice=createSlice({
@@ -15,12 +19,14 @@ const AuthSlice=createSlice({
     login(state,action){
       state.token=action.payload
       localStorage.setItem("token", action.payload)
+     
       state.isLoggein=true
     },
     logout(state){
      state.token=null
      localStorage.removeItem("token")
-     state.isLoggein=false
+     localStorage.removeItem("email")
+      state.isLoggein=false
     }
   }
 })

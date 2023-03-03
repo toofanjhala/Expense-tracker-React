@@ -1,0 +1,25 @@
+/* CSS code for the button component */
+
+.premiumbutton {
+    background-color: #4CAF50;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 8px 16px;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    margin: 10px 0 0 10px;
+  }
+  
+  .premiumbutton:hover {
+    background-color: #358237;
+    transform: scale(1.05);
+  }
+  

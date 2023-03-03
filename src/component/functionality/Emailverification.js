@@ -1,7 +1,9 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
+
+import classes from "./Emailverification.module.css"
 
 import { useSelector } from 'react-redux'
+import { Header } from '../UI/Header'
 
 export const Emailverification = () => {
     const token=useSelector(state=>state.auth.token)
@@ -35,8 +37,19 @@ export const Emailverification = () => {
     }
 
     return (
-        <Button variant='success' 
+        <>
+        <Header/>
+        <div className={classes.container}>
+		<h1>Email Verification</h1>
+		<p>Thank you for registering with us! To verify your email address, please click the button below:</p>
+		<button onClick={emailverifyhandler} className={classes.button}>Verify Email Address</button>
+		<p><strong>Advisory:</strong> Please ensure that you have login with your registered email . If you did not register for an account with us, please ignore this email verification.</p>
+		<p><strong>Precautions:</strong> Please be cautious of any suspicious emails or links, and do not share your personal information with anyone.</p>
+	</div>
+
+        {/* <Button variant='success' 
         style={{position:"fixed",top:"8rem", right:"2rem"}}
-        onClick={emailverifyhandler}>Email Verfication</Button>
+        onClick={emailverifyhandler}>Email Verfication</Button>*/}
+        </> 
     )
 }

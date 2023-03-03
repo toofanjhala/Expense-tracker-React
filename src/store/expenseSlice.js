@@ -3,29 +3,27 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const intialExpensestate={ 
     item: [],
+    totalamount:0,
    }
 
-const ExpenseSlice=createSlice({
+   const ExpenseSlice=createSlice({
     name:"Expense",
     initialState:intialExpensestate,
     reducers:{
-       additems(state,action){
-        async function additemhandler(action) {
-            try {
-              const res = await axios.post("https://expense-tracker-1c21b-default-rtdb.firebaseio.com/cart.json", action.payload)
-              console.log(res)
-            }
-            catch (Err) {
-              console.log(Err)
-            }
-        
-            getdata()
-          }
-        
-
-       } 
+     setExpense(state,action){
+        state.item=action.payload.data
+        state.totalamount = action.payload.total
+     }
 
     }
+   })
+
+   export const ExpenseAction=ExpenseSlice.actions
+
+   export const ExpenseReducer=ExpenseSlice.reducer
 
 
-})
+
+        
+
+     

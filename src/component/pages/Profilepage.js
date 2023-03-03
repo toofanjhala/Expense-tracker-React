@@ -22,6 +22,7 @@ export const Profilepage = () => {
 					}
 				})
 			const data = await res.json()
+			console.log(data)
 
 			if (data.users[0].displayName) {
 				nameref.current.value = data.users[0].displayName

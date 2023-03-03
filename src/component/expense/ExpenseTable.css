@@ -1,6 +1,7 @@
 .container {
   display: flex;
   margin: 50px auto;
+  color:chocolate;
   width: 100%;
 }
 
@@ -8,6 +9,7 @@
   font-size: 14px;
   border-collapse: separate;
   border-spacing: 0 8px;
+
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -15,6 +17,8 @@
 .expense-table td {
   padding: 12px;
   text-align: left;
+  
+ 
 }
 
 .expense-table th {
@@ -26,6 +30,7 @@
 .expense-table tbody tr:hover {
   background-color: rgb(168, 168, 168);
   cursor: pointer;
+ 
 }
 
 .delete-btn {

@@ -31,6 +31,9 @@ const AuthForm = () => {
     const enteredemail = emailref.current.value;
     const enteredpassword = passwordref.current.value;
 
+    const editedemail=  enteredemail.replace(/[^a-zA-Z]/g, '');
+    
+
     if (!isLogin) {
       const enterconfirmpswrd = confirmpasswordref.current.value
 
@@ -48,6 +51,7 @@ const AuthForm = () => {
     let url;
 
     if (isLogin) {
+      
 
       url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBiavyg_VJqzOb714tLnQrb7h5qRK0P8Hs"
 
@@ -83,6 +87,7 @@ const AuthForm = () => {
       }).then((data) => {
         Navigate("/home")
         dispatch(AuthAction.login(data.idToken))
+        localStorage.setItem("email",editedemail)
 
       })
       .catch((Err) => {

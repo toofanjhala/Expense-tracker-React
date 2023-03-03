@@ -5,6 +5,7 @@ import { Profilepage } from './component/pages/Profilepage';
 import { Resetpassword } from './component/pages/Resetpassword';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Emailverification } from './component/functionality/Emailverification';
 
 function App() {
   const isAuthenticated=useSelector(state=>state.auth.isLoggein)
@@ -18,6 +19,7 @@ function App() {
        {isAuthenticated  && <Route path="/home" element={<Home />} /> }
        {!isAuthenticated  && <Route path="/home" element={<AuthForm/>} /> }
         <Route path="/profile" element={<Profilepage />} />
+        <Route path="/emailverification" element={<Emailverification />} />
     </Routes>
     </BrowserRouter>
   );

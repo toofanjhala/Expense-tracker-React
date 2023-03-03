@@ -1,17 +1,38 @@
-import React, { useContext } from 'react'
-import Authcontext from '../../store/Auth-context'
-import { Table } from 'react-bootstrap'
+import React, { useEffect} from 'react'
+import { Button, Table } from 'react-bootstrap'
 import "./ExpenseTable.css"
+import { useDispatch,useSelector } from 'react-redux'
+import { getExpenses,deleteExpense } from '../../store/expenseAction'
+import { saveAs } from 'file-saver'
 export const ExpenseTable = (props) => {
 
-  const authctx = useContext(Authcontext)
+  const dispatch=useDispatch()
+  const expenseitem=useSelector((state)=>state.Expense.item)
+  const Totalamount=useSelector((state)=>state.Expense.totalamount)
 
-  function DeleteHandler(id) {
-    authctx.deleteitems(id)
+  useEffect(() => {
+    getExpenses(dispatch);
+  }, [dispatch]);
+
+  const downloadExpenses = () => {
+   
+    const headerRow = ['Amount', 'Description', 'Category'];
+    const Datarow = expenseitem.map(expense => [expense.description,expense.category,expense.amount])
+
+    const csvData = [headerRow, ...Datarow].map(row => row.join(',')).join('\n')
+   
+ // Convert CSV string to Blob
+ const csvBlob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    // Save Blob as file using FileSaver.js
+    saveAs(csvBlob, 'expenses.csv');
   }
+
+  
+
 
  return (
     <div className="container">
+   
       <Table className="expense-table" striped bordered hover>
         <thead>
           <tr>
@@ -24,17 +45,23 @@ export const ExpenseTable = (props) => {
         </thead>
         <tbody>
 
-          {authctx.item.map((data, index) => (
-
+          {expenseitem.map((data, index) => (
+ 
             <tr key={index}>
               <td>{data.amount}</td>
               <td>{data.description}</td>
               <td>{data.category}</td>
-              <td> <button className="delete-btn" onClick={DeleteHandler.bind(null, data.key)}>Delete</button></td>
-              <td> <button className="edit-btn" onClick={() => props.edit(data.key)}>Edit</button></td>
+              <td> <button className="delete-btn"  onClick={()=>deleteExpense(data.id,dispatch)}>Delete</button></td>
+              <td> <button className="edit-btn" onClick={() => props.edit(data.id)}>Edit</button></td>
 
             </tr>
+              
           ))}
+          <tr>
+            <td>Total Expense</td>
+            <td>{Totalamount} </td>
+           {Totalamount>10000 && <td>  <Button variant='warning' onClick={downloadExpenses}>Download File</Button></td>} 
+          </tr>
         </tbody>
       </Table>
     </div>
