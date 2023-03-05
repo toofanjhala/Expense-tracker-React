@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { Header } from '../UI/Header'
 
 export const Emailverification = () => {
-    const token=useSelector(state=>state.auth.token)
+    const token=useSelector((state)=>state.auth.token)
    
 
     async function emailverifyhandler() {

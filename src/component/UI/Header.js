@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 export const Header = () => {
  
-  const isLoggein=useSelector(state=>state.auth.isLoggein)
+  const isLoggein=useSelector((state)=>state.auth.isLoggein)
   
   return (
     <header className="sticky">

@@ -7,9 +7,6 @@ const intialtoken = localStorage.getItem("token")
 const intialAuthstate={ 
 token: intialtoken,
 isLoggein: !!intialtoken,
-
-
-
 }
 
 const AuthSlice=createSlice({

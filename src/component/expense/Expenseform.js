@@ -3,13 +3,14 @@ import "./Expenseform.css"
 import { ExpenseTable } from './ExpenseTable'
 import { postExpenses } from '../../store/expenseAction'
 import { useDispatch } from 'react-redux'
-import { EditExpense } from '../../store/expenseAction'
-import { deleteExpense } from '../../store/expenseAction'
+import { getEditExpense } from '../../store/expenseAction'
+import { Button } from 'react-bootstrap'
+
 export const Expenseform = () => {
 
   const [editExpense, setEditExpense] = useState({ amount: "", description: "", category: "" });
+  const [editstatusid, seteditstatusid] = useState(null)
   const dispatch = useDispatch()
-
 
 
 
@@ -19,11 +20,17 @@ export const Expenseform = () => {
     const enteredtextarea = editExpense.description
     const enteredcategory = editExpense.category
 
-    console.log(enteredcategory)
+  
+    if (editstatusid === null) {
+      postExpenses(null, { amount: enteredamount, category: enteredcategory, description: enteredtextarea }, dispatch)
+    }
+    else {
+      postExpenses(editstatusid, { amount: enteredamount, category: enteredcategory, description: enteredtextarea }, dispatch)
+    }
 
-    postExpenses({ amount: enteredamount, category: enteredcategory, description: enteredtextarea }, dispatch)
+           setEditExpense({ amount: "", description: "", category: "" })
 
-    setEditExpense({ amount: "", description: "", category: "" })
+           seteditstatusid(null)
 
   }
 
@@ -31,25 +38,17 @@ export const Expenseform = () => {
 
   async function edithandler(id) {
 
-
-
-    const data = await EditExpense(id, dispatch)
+    const data = await getEditExpense(id, dispatch)
     setEditExpense({ amount: data.amount, description: data.description, category: data.category })
-
-    await deleteExpense(id, dispatch)
+    seteditstatusid(id)
 
   }
-
-
-
-
-
 
   return (
     <div>
       <div className="form-container">
 
-        <form onSubmit={expenseHandler}>
+        <form >
           <h2>Expense Details</h2>
           <div >
             <label htmlFor="expense">Total Expense:</label>
@@ -61,15 +60,15 @@ export const Expenseform = () => {
           </div>
           <div>
             <label className="category-label" htmlFor="category">Category:</label>
-            <select id="category" name="category"  value={editExpense.category}   onChange={(e) => setEditExpense({ ...editExpense, category: e.target.value })}>
-              <option value="Category" >Choose a Category</option>    
+            <select id="category" name="category" required value={editExpense.category} onChange={(e) => setEditExpense({ ...editExpense, category: e.target.value })}>
+              <option value="" >Choose a Category</option>
               <option value="food" >Food</option>
               <option value="movie" >Movie</option>
               <option value="petrol" >Petrol</option>
               <option value="other" >Other</option>
             </select>
           </div>
-          <input type="submit" value="Submit" />
+          <Button onClick={expenseHandler} >{editstatusid? "Update":"Submit"} </Button>
         </form>
       </div>
       <ExpenseTable edit={edithandler} />

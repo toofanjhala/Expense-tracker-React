@@ -4,6 +4,8 @@ import { Header } from '../UI/Header'
 import { useSelector } from 'react-redux'
 
 export const Profilepage = () => {
+
+	
 	
 	const token=useSelector(state=>state.auth.token)
 	const nameref = useRef("")
@@ -27,6 +29,8 @@ export const Profilepage = () => {
 			if (data.users[0].displayName) {
 				nameref.current.value = data.users[0].displayName
 				urlref.current.value = data.users[0].photoUrl
+              
+
 			}
 		}
 
